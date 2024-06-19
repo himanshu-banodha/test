@@ -84,8 +84,11 @@ def emoji_helper(selected_user,df):
         df = df[df['user'] == selected_user]
 
     emojis = []
+    # for message in df['message']:
+    #     emojis.extend([c for c in message if c in emoji['en']])
+
     for message in df['message']:
-        emojis.extend([c for c in message if c in emoji['en']])
+        emojis.extend([c for c in message if emoji.is_emoji(c)]) 
 
     emoji_df = pd.DataFrame(Counter(emojis).most_common(len(Counter(emojis))))
 
